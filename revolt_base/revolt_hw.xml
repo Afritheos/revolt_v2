@@ -1,0 +1,9 @@
+<library path="diffdrive_revolt">
+
+  <class name="revolt_base/DiffDriveRevolt" type="revolt_base::DiffDriveRevolt" base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware interface implementation for the Revolt robot.
+    </description>
+  </class>
+
+</library>

@@ -179,7 +179,7 @@
     <link name="rplidar_laser_link" />
     <joint name="rplidar_laser_joint" type="fixed">
         <origin xyz="0.068995117891150689604 0.00011464698805746520449 0.15024683531486093813"
-            rpy="9.8371194238862312071e-14 -8.8439464137082285948e-14 0.042558116801597767331" />
+            rpy="0 0 ${pi}" />
         <parent link="chassis" />
         <child link="rplidar_laser_link" />
         <axis xyz="0 0 0" />
