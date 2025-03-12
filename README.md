@@ -45,7 +45,7 @@ It is fully integrated with ROS 2 and it is a great base platform for our contin
 |-------------|-------------|
 | **revolt_base 🚀** | Core functionalities for the Revolt platform. |
 | **revolt_bringup 🔧** | Scripts and launch files for booting up the system. |
-| **revolt_control 🎮** | Motor control, PID tuning, and movement algorithms. |
+| **revolt_control 🎮** | Motor control, and movement algorithms. |
 | **revolt_description 📐** | URDF and meshes for Revolt's 3D model and simulation. |
 | **revolt_firmware 🖥️** | Low-level firmware managing hardware interactions. |
 | **revolt_gz_classic 🏗️** | Integration with Gazebo Classic for simulation. |
