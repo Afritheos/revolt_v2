@@ -124,5 +124,3 @@ Watch Revolt in action on YouTube:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-💡 *Revolt Robotics - Powering the Future of Autonomous Systems!*
