@@ -1,12 +1,12 @@
 import os
-
+from os.path import join
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import Node
 
 
@@ -18,6 +18,15 @@ def generate_launch_description():
 
     pkg_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_revolt_gazebosim = get_package_share_directory('revolt_gazebosim')
+    world_file = join(pkg_revolt_gazebosim, 'worlds', 'empty.sdf')
+
+    world = LaunchConfiguration('world')
+
+    world_arg = DeclareLaunchArgument(
+        'world',
+        default_value= world_file,
+        description= 'world to load'
+    )
 
     use_sim_time_argument = DeclareLaunchArgument(
         'use_sim_time',
@@ -25,10 +34,19 @@ def generate_launch_description():
         description='Use simulation (Gazebo) clock if true',
     )
 
-    world_argument = DeclareLaunchArgument(
-        name='world',
-        default_value='empty.world',
-        description='Full path to the world model file to load')
+
+    
+
+    
+
+    # spawn_revolt_node = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(join(pkg_revolt_gazebosim, "launch", "spawn_robot.launch.py")),
+    #     launch_arguments={
+    #         # Pass any arguments if your spawn.launch.py requires
+    #     }.items()
+    # )
+
+    
 
     use_rviz_argument = DeclareLaunchArgument(
         'rviz', default_value='true', description='Open RViz.'
@@ -49,11 +67,10 @@ def generate_launch_description():
 
     # Gazebo launch
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_gz_sim, 'launch', 'gz_sim.launch.py')
-        ),
+        PythonLaunchDescriptionSource(join(pkg_gz_sim, 'launch', 'gz_sim.launch.py')),
         launch_arguments={
-            'world': LaunchConfiguration('world'),
+            'gz_args' : ['-r -v4', world_file ]
+
         }.items()
     )
 
@@ -72,10 +89,10 @@ def generate_launch_description():
         [
             use_sim_time_argument,
             declare_rviz_config_file_cmd,
-            world_argument,
+            world_arg,
             use_rviz_argument,
             gazebo,
             include_revolt,
-            revolt_visualization_timer,
+            # revolt_visualization_timer,
         ]
     )

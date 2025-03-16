@@ -8,6 +8,7 @@ from launch.substitutions import PythonExpression
 from launch_ros.actions import Node
 from xacro import process_file
 
+pkg_revolt_gz = get_package_share_directory('revolt_gazebosim')
 
 def get_robot_description() -> str:
     """
@@ -24,8 +25,7 @@ def get_robot_description() -> str:
 
     """
     doc = process_file(
-        os.path.join(
-            get_package_share_directory('revolt_gazebosim'), 'urdf', 'revolt_gazebosim.xacro'
+        os.path.join(pkg_revolt_gz, 'urdf', 'revolt_gazebosim.xacro'
         ),
         mappings={
             
@@ -48,8 +48,8 @@ def generate_launch_description():
     initial_pose_y = LaunchConfiguration('initial_pose_y')
     initial_pose_z = LaunchConfiguration('initial_pose_z')
     initial_pose_yaw = LaunchConfiguration('initial_pose_yaw')
-    use_ros_control = LaunchConfiguration('use_gazebo_ros_control')
-    entity = LaunchConfiguration('entity')
+    
+    
     robot_description_topic = LaunchConfiguration('robot_description_topic')
     rsp_frequency = LaunchConfiguration('rsp_frequency')
 
@@ -74,9 +74,7 @@ def generate_launch_description():
         description='Initial yaw pose of revolt in the simulation',
     )
     
-    entity_argument = DeclareLaunchArgument(
-        'entity', default_value='revolt', description='Name of the robot'
-    )
+  
     robot_desc_argument = DeclareLaunchArgument(
         'robot_description_topic',
         default_value='/robot_description',
@@ -113,6 +111,18 @@ def generate_launch_description():
         
     )
 
+    bridge_config_file = os.path.join(pkg_revolt_gz, 'config', 'gz_bridge.yaml')
+
+
+    bridge_node = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        output='screen',
+        parameters=[{
+            'config_file': bridge_config_file
+        }],
+    )
+
   
     robot_spawn = Node(
         package='ros_gz_sim',
@@ -121,7 +131,7 @@ def generate_launch_description():
             '-topic',
             robot_description_topic,
             '-name',
-            "revolt",
+            'revolt',
             '-x',
             initial_pose_x,
             '-y',
@@ -136,23 +146,7 @@ def generate_launch_description():
             initial_pose_yaw,
         ],
     )
-    # joint_state_broadcaster_spawner = Node(
-    #     package='controller_manager',
-    #     executable='spawner',
-    #     arguments=[
-    #         'joint_state_broadcaster',
-    #         '--controller-manager',
-    #         '/controller_manager',
-    #     ],
-    #     condition=IfCondition(use_ros_control),
-    # )
-
-    # diff_drive_controller_spawner = Node(
-    #     package='controller_manager',
-    #     executable='spawner',
-    #     arguments=['diff_controller', '--controller-manager', '/controller_manager'],
-    #     condition=IfCondition(use_ros_control),
-    # )
+    
 
     return LaunchDescription(
         [
@@ -163,9 +157,9 @@ def generate_launch_description():
             robot_desc_argument,
             rsp_frequency_argument,
             yaw_argument,
-            entity_argument,
             rsp,
             robot_spawn,
+            bridge_node,
             
         ]
     )
