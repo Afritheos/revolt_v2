@@ -8,6 +8,7 @@ from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import Node
+from launch.actions import AppendEnvironmentVariable
 
 
 def generate_launch_description():
@@ -18,15 +19,19 @@ def generate_launch_description():
 
     pkg_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_revolt_gazebosim = get_package_share_directory('revolt_gazebosim')
-    world_file = join(pkg_revolt_gazebosim, 'worlds', 'empty.sdf')
+    pkg_revolt_description = get_package_share_directory('revolt_description')
 
-    world = LaunchConfiguration('world')
+    world_file = LaunchConfiguration("world_file", default = join(pkg_revolt_gazebosim, "worlds", "empty.sdf"))
 
-    world_arg = DeclareLaunchArgument(
-        'world',
-        default_value= world_file,
-        description= 'world to load'
-    )
+    # default_world = join(pkg_revolt_gazebosim, 'worlds', 'empty.sdf')
+
+    # world = LaunchConfiguration('world')
+
+    # world_arg = DeclareLaunchArgument(
+    #     'world',
+    #     default_value= default_world,
+    #     description= 'world to load'
+    # )
 
     use_sim_time_argument = DeclareLaunchArgument(
         'use_sim_time',
@@ -67,9 +72,9 @@ def generate_launch_description():
 
     # Gazebo launch
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(join(pkg_gz_sim, 'launch', 'gz_sim.launch.py')),
+        PythonLaunchDescriptionSource(join(pkg_gz_sim, "launch", "gz_sim.launch.py")),
         launch_arguments={
-            'gz_args' : ['-r -v4', world_file ]
+            "gz_args" : PythonExpression(["'", world_file, " -r'"])
 
         }.items()
     )
@@ -87,12 +92,25 @@ def generate_launch_description():
     )
     return LaunchDescription(
         [
+            
+            AppendEnvironmentVariable(
+            name='GZ_SIM_RESOURCE_PATH',
+            value=join(pkg_revolt_gazebosim, 'worlds')),
+
+            AppendEnvironmentVariable(
+            name='GZ_SIM_RESOURCE_PATH',
+            value=join(pkg_revolt_description, 'meshes')),
+
+            # DeclareLaunchArgument("use_sim_time", default_value=use_sim_time),
+            DeclareLaunchArgument('world_file', default_value=world_file),
+            
+            
             use_sim_time_argument,
             declare_rviz_config_file_cmd,
-            world_arg,
+            # world_arg,
             use_rviz_argument,
             gazebo,
             include_revolt,
-            # revolt_visualization_timer,
+            revolt_visualization_timer,
         ]
     )
