@@ -5,23 +5,11 @@
 
    
 	  <gazebo>
-    <!-- <plugin name="revolt_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
-      <ros>
-        <remapping>~/out:=joint_states</remapping>
-        <remapping>/tf:=tf</remapping>
-      </ros>
-      <update_rate>30</update_rate>
-      <joint_name>right_wheel_joint</joint_name>
-      <joint_name>left_wheel_joint</joint_name>
-      <joint_name>frontcaster_rotation_joint</joint_name>
-      <joint_name>frontcaster_wheel_joint</joint_name>
-      <joint_name>backcaster_rotation_joint</joint_name>
-      <joint_name>backcaster_wheel_joint</joint_name>
-    </plugin> -->
+    
 
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
       <topic>joint_states</topic> <!--from <ros><remapping> -->
-
+      <update_rate>5</update_rate>
       <joint_name>right_wheel_joint</joint_name>
       <joint_name>left_wheel_joint</joint_name>
       <joint_name>frontcaster_rotation_joint</joint_name>
@@ -41,7 +29,7 @@
       <wheel_radius>0.038</wheel_radius>
 
       <!-- limits -->
-      <max_linear_acceleration>0.033</max_linear_acceleration> <!-- computed from <max_linear_acceleration> in the original plugin-->
+      <max_linear_acceleration>1</max_linear_acceleration> <!-- computed from <max_linear_acceleration> in the original plugin-->
 
       <topic>cmd_vel</topic> <!-- from <commant_topic> -->
 
@@ -55,32 +43,6 @@
     </plugin>
 	  </gazebo>
   
-<!-- 
-    <gazebo reference="rplidar_laser_link">
-      <sensor name="laser" type="gpu_lidar">
-        <visualize>false</visualize>
-        <update_rate>10</update_rate>
-        <lidar>
-          <scan>
-            <horizontal>
-            <samples>720</samples>
-            <resolution>1</resolution>
-            <min_angle>-3.14</min_angle>
-            <max_angle>3.14</max_angle>
-            </horizontal>
-          </scan>
-          <range>
-            <min>0.10</min>
-            <max>12.0</max>
-            <resolution>0.01</resolution>
-          </range>
-        </lidar>
-      
-        <topic>scan</topic>
-         
-        <gz_frame_id>rplidar_laser_link</gz_frame_id>
-      </sensor>
-    </gazebo> -->
 
     
     <gazebo reference="rplidar_laser_link">
@@ -113,41 +75,14 @@
         </sensor>
     </gazebo>
 
-        <!-- <sensor name="gpu_lidar" type="gpu_lidar">
-          <always_on>true</always_on>
-          <visualize>true</visualize>
-          <pose>-0.064 0 0.121 0 0 0</pose>
-          <update_rate>5</update_rate>
-          <topic>scan</topic>
-          <gz_frame_id>base_scan</gz_frame_id>
-          <lidar>
-              <scan>
-                  <horizontal>
-                      <samples>360</samples>
-                      <resolution>1</resolution>
-                      <min_angle>-3.14</min_angle>
-                      <max_angle>3.14</max_angle>
-                  </horizontal>
-              </scan>
-              <range>
-                  <min>0.10</min>
-                  <max>12.0</max>
-                  <resolution>0.01</resolution>
-              </range>
-              <noise>
-                  <type>gaussian</type>
-                  <mean>0.0</mean>
-                  <stddev>0.001</stddev>
-              </noise>
-          </lidar>
-        </sensor> -->
 
 
-
-    <!-- <joint name="camera_optical_joint" type="fixed">
+    <joint name="camera_optical_joint" type="fixed">
         <parent link="camera_link"/>
         <child link="camera_link_optical"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
+
+        
         <axis xyz="0 0 0" />
     </joint>
 
@@ -156,22 +91,23 @@
     <gazebo reference="camera_link">
         <sensor name='camera' type='camera'>
           <camera>
-            <horizontal_fov>1.047</horizontal_fov>
+            <camera_info_topic>camera/camera_info</camera_info_topic>
+            <horizontal_fov>1.089</horizontal_fov>
             <image>
               <width>640</width>
               <height>480</height>
             </image>
             <clip>
-              <near>0.1</near>
-              <far>100</far>
+              <near>0.05</near>
+              <far>8.0</far>
             </clip>
           </camera>
-          <always_on>1</always_on>
-          <update_rate>30</update_rate>
-          <topic>camera/image_raw</topic>
+          <update_rate>10</update_rate>
+          <visualize>true</visualize>
+          <topic>camera/image_raw</topic>`
           <gz_frame_id>camera_link_optical</gz_frame_id>
           
         </sensor>
-  </gazebo> -->
+  </gazebo>
 
 </robot>

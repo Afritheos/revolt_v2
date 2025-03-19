@@ -114,13 +114,21 @@ def generate_launch_description():
     bridge_config_file = os.path.join(pkg_revolt_gz, 'config', 'gz_bridge.yaml')
 
 
-    bridge_node = Node(
+    gz_bridge_node = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         output='screen',
         parameters=[{
             'config_file': bridge_config_file
         }],
+    )
+
+    gz_image_bridge = Node(
+        package='ros_gz_image',
+        executable='image_bridge',
+        arguments=["camera/image_raw"],
+        output='screen',
+
     )
 
   
@@ -159,7 +167,8 @@ def generate_launch_description():
             yaw_argument,
             rsp,
             robot_spawn,
-            bridge_node,
+            gz_bridge_node,
+            gz_image_bridge,
             
         ]
     )

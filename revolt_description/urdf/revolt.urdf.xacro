@@ -167,7 +167,7 @@
     <link name="camera_link" />
     <joint name="camera_joint" type="fixed">
         <origin xyz="-0.0065090556831789159187 0.028999999999999984124 1.1221743816224209809e-05"
-            rpy="-1.570796326794896558 3.2526065174728515974e-16 1.570796326794896558" />
+            rpy="1.570796326794896558 3.2526065174728515974e-16 3.141592653589793116" />
         <parent link="camera_mount" />
         <child link="camera_link" />
         <axis xyz="0 0 0" />
@@ -220,8 +220,8 @@
         <parent link="chassis" />
         <child link="left_wheel" />
         <axis xyz="0 0 1" />
-        <limit effort="1" velocity="20" />
-        <joint_properties friction="0.0" />
+        
+        
     </joint>
 
 
@@ -259,8 +259,8 @@
         <parent link="chassis" />
         <child link="right_wheel" />
         <axis xyz="0 0 -1" />
-        <limit effort="1" velocity="20" />
-        <joint_properties friction="0.0" />
+        
+        
     </joint>
 
 
@@ -343,7 +343,7 @@
 
         <joint name="frontcaster_rotation_joint" type="continuous">
             <origin
-                xyz="-0.094939000879477097872 -2.5246608566260299064e-10 -0.0082499999999999969191"
+                xyz="-0.094939000879477097872 -2.5246608566260299064e-10 -0.0075"
                 rpy="0 -0 -3.141592653589793116" />
             <parent link="chassis" />
             <child link="caster_punch_bracket" />
@@ -376,7 +376,9 @@
         </inertial>
     </link>
 
-    <link name="caster_wheel_2">
+    <link name="caster_wheel_2"><limit>
+      <effort>20</effort> <!-- from <wheel_torque> in libgazebo_ros_diff_drive.so.-->
+    </limit>
         <visual>
             <origin xyz="0 0 8.6736173798840354721e-19"
                 rpy="0 -8.2173010960533594582e-33 -5.4231385880628728748e-48" />
@@ -434,7 +436,7 @@
 
         <joint name="backcaster_rotation_joint" type="continuous">
             <origin
-                xyz="0.097009446841797339345 -2.4932854392201164728e-10 -0.0082499999999999969191"
+                xyz="0.097009446841797339345 -2.4932854392201164728e-10 -0.0075"
                 rpy="0 -0 1.3216940769347106485e-16" />
             <parent link="chassis" />
             <child link="caster_punch_bracket_2" />
