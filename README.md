@@ -19,9 +19,9 @@ It is fully integrated with ROS 2 and it is a great base platform for our contin
 
 # 🚀 Revolt
 
-✨ **Revolt: Open-Source Mobile Robotic Kit** ✨  
+✨ **Revolt: Mobile Robotic Kit** ✨  
 
-**Revolt** is a cutting-edge, open-source mobile robot Kit built for high-performance autonomous systems. Designed as a learning kit for robotics beginners, it provides a hands-on introduction to **ROS 2** and real-world hardware integration.  
+**Revolt** is a personal self-development project focused on building a mobile robot kit for autonomous systems. Designed to deepen my understanding of robotics, the project served as a practical learning platform for mastering **ROS 2** and integrating real-world hardware. Through hands-on experimentation, I explored autonomous navigation, sensor integration, and system-level robotics design.
 
 🔧 **Key Features:**  
 - Runs on **ROS 2**, enabling seamless robotics development.  
@@ -117,7 +117,7 @@ source install/setup.bash
 
 Watch Revolt in action on YouTube:
 📺 [Revolt Demonstration Playlist](https://www.youtube.com/playlist?list=PLCbmpDw8dFjcA3yO1rBD3gkzvP6GnQTbm)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tcmcyrkjlWY?si=aFnVfgFRzQszALwp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 
 ## 📜 License
 
