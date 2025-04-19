@@ -21,7 +21,7 @@ def generate_launch_description():
     pkg_revolt_gazebosim = get_package_share_directory('revolt_gazebosim')
     pkg_revolt_description = get_package_share_directory('revolt_description')
 
-    world_file = LaunchConfiguration("world_file", default = join(pkg_revolt_gazebosim, "worlds", "empty.sdf"))
+    world_file = LaunchConfiguration("world_file", default = join(pkg_revolt_gazebosim, "worlds", "playground.sdf"))
 
     # default_world = join(pkg_revolt_gazebosim, 'worlds', 'empty.sdf')
 

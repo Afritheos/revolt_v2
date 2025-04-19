@@ -176,12 +176,12 @@
 
     <!-- ................................ LIDAR .................................. -->
 
-    <link name="rplidar_laser_link" />
+    <link name="rplidar_laser" />
     <joint name="rplidar_laser_joint" type="fixed">
         <origin xyz="0.068995117891150689604 0.00011464698805746520449 0.15024683531486093813"
             rpy="0 0 ${pi}" />
         <parent link="chassis" />
-        <child link="rplidar_laser_link" />
+        <child link="rplidar_laser" />
         <axis xyz="0 0 0" />
     </joint>
 
@@ -376,9 +376,10 @@
         </inertial>
     </link>
 
-    <link name="caster_wheel_2"><limit>
-      <effort>20</effort> <!-- from <wheel_torque> in libgazebo_ros_diff_drive.so.-->
-    </limit>
+    <link name="caster_wheel_2">
+        <!-- <limit>
+      <effort>20</effort> 
+    </limit> -->
         <visual>
             <origin xyz="0 0 8.6736173798840354721e-19"
                 rpy="0 -8.2173010960533594582e-33 -5.4231385880628728748e-48" />

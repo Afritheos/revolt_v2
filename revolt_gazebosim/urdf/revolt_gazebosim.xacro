@@ -45,13 +45,13 @@
   
 
     
-    <gazebo reference="rplidar_laser_link">
+    <gazebo reference="rplidar_laser">
         <sensor name="gpu_lidar" type="gpu_lidar">
           <always_on>true</always_on>
           <visualize>true</visualize>
           <update_rate>5</update_rate>
           <topic>scan</topic>
-          <gz_frame_id>base_scan</gz_frame_id>
+          <gz_frame_id>rplidar_laser</gz_frame_id>
           <lidar>
               <scan>
                   <horizontal>
