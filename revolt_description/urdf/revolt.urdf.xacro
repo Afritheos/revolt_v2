@@ -377,9 +377,6 @@
     </link>
 
     <link name="caster_wheel_2">
-        <!-- <limit>
-      <effort>20</effort> 
-    </limit> -->
         <visual>
             <origin xyz="0 0 8.6736173798840354721e-19"
                 rpy="0 -8.2173010960533594582e-33 -5.4231385880628728748e-48" />

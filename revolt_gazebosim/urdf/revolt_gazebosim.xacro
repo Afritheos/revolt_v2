@@ -75,14 +75,21 @@
         </sensor>
     </gazebo>
 
+    <gazebo reference="imu_frame">
+      <sensor name="imu_sensor" type="imu">
+          <always_on>1</always_on>
+          <update_rate>1</update_rate>
+          <gz_frame_id>imu_frame</gz_frame_id>
+          <visualize>true</visualize>
+          <topic>imu</topic>
+      </sensor>
+    </gazebo>
 
 
     <joint name="camera_optical_joint" type="fixed">
         <parent link="camera_link"/>
         <child link="camera_link_optical"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-
-        
+        <origin xyz="0 0 0" rpy="0 0 0"/>       
         <axis xyz="0 0 0" />
     </joint>
 

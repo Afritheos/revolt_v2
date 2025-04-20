@@ -72,20 +72,20 @@
       <self_collide>false</self_collide>
     </model>
 
-    <model name='walls'>
+    <model name='course'>
       <static>true</static>
       <link name='link_0'>
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file://///home/kcee/rv_ws/src/revolt/revolt_gazebosim/worlds/model/walls.obj</uri>
+              <uri>file://///home/kcee/rv_ws/src/revolt/revolt_gazebosim/worlds/model/course.obj</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name='collision_0'>
           <geometry>
             <mesh>
-              <uri>file:////home/kcee/rv_ws/src/revolt/revolt_gazebosim/worlds/model/walls.obj</uri>
+              <uri>file:////home/kcee/rv_ws/src/revolt/revolt_gazebosim/worlds/model/course.obj</uri>
             </mesh>
           </geometry>
         </collision>
