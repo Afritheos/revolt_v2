@@ -19,6 +19,7 @@ def generate_launch_description():
 
     pkg_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_revolt_gazebosim = get_package_share_directory('revolt_gazebosim')
+    pkg_revolt_navigation = get_package_share_directory('revolt_navigation')
     pkg_revolt_description = get_package_share_directory('revolt_description')
 
     world_file = LaunchConfiguration("world_file", default = join(pkg_revolt_gazebosim, "worlds", "playground.sdf"))
@@ -59,7 +60,7 @@ def generate_launch_description():
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         'rviz_config_file',
         default_value=os.path.join(
-            pkg_revolt_gazebosim, 'rviz', 'revolt_gazebosim.rviz'),
+            pkg_revolt_navigation, 'rviz', 'nav2_default_view.rviz'),
         description='Full path to the RVIZ config file to use',
     )
 
